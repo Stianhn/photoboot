@@ -27,11 +27,11 @@ app.get('/picture', function (req, res) {
       console.log('exec error: ' + error);
     }
   });
-  res.json({path: time + ".jpg"});
+  res.json({path: tmpFolder + "/" + time + ".jpg"});
 });
 
 
-app.delete('/picture/:name', function (req, res) {
+app.delete('/picture/:folder/:name', function (req, res) {
   console.log('Dat param: ' + tmpFolder + '/' +req.params.name);
   exec('rm -f '+ tmpFolder + '/' + req.params.name, function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
