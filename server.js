@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 app.get('/picture', function (req, res) {
   var time = md5(new Date());
 
-  exec('cp /tmp/stream/pic.jpg ' + tmpFolder + '/' + time + '.jpg', function (error, stdout, stderr) {
+  exec('wget http://localhost:9000/stream/snapshot.jpeg?delay_s=3 -O ' + tmpFolder + '/' + time + '.jpg', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
     if (error !== null) {
