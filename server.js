@@ -27,7 +27,7 @@ app.get('/picture', function (req, res) {
       console.log('exec error: ' + error);
     }
   });
-  res.json({path: tmpFolder + "/" + time + ".jpg"});
+  res.json({path: time + ".jpg"});
 });
 
 
