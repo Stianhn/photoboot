@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs');
+var md5 = require('md5');
 var exec = require('child_process').exec;
 var app = express();
 var tmpFolder = "tmp_pictures";
@@ -17,7 +18,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/picture', function (req, res) {
-  var time = new Date().toString();
+  var time = md5(new Date());
 
   exec('cp /tmp/stream/pic.jpg ' + tmpFolder + '/' + time + '.jpg', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
