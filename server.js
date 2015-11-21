@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 var exec = require('child_process').exec;
 var app = express();
 var tmpFolder = "tmp_pictures";
@@ -16,14 +17,16 @@ app.get('/', function (req, res) {
 });
 
 app.get('/picture', function (req, res) {
-  exec('ls', function (error, stdout, stderr) {
+  var time = new Date().toString();
+
+  exec('cp /tmp/stream/pic.jpg ' + tmpFolder + '/' + time + '.jpg', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
     if (error !== null) {
       console.log('exec error: ' + error);
     }
   });
-  res.json({path: tmpFolder + "/pic.jpg"});
+  res.json({path: tmpFolder + "/" + time + ".jpg"});
 });
 
 
@@ -48,7 +51,13 @@ app.put('/picture/:name', function (req, res) {
     }
   });
   res.send('STORING image');
-})
+});
+
+app.get('/pictures', function (req, res) {
+  fs.readdir('images', function (err, data) {
+    res.send(data);
+  })
+});
 
 var server = app.listen(8080, function () {
   console.log("Server up and running");
