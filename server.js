@@ -43,7 +43,7 @@ app.delete('/picture/:folder/:name', function (req, res) {
   res.send('DELETE request to homepage -' + req.param('name'));
 });
 
-app.put('/picture/:name', function (req, res) {
+app.put('/picture/:folder/:name', function (req, res) {
   exec('mv ' + tmpFolder + '/' + req.params.name + ' ' + imageFolder, function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
